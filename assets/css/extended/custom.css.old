@@ -1,0 +1,43 @@
+/* ==========================================================================
+   📏 AJUSTE DE ESPAÇAMENTO DO CABEÇALHO (COM !IMPORTANT)
+   ========================================================================== */
+
+/* 1. Reduz o espaçamento geral do contêiner do cabeçalho */
+.header {
+    padding: 0 16px !important;    /* Força o padding menor */
+    margin-top: 5px !important;    /* Cola o menu mais no topo da tela */
+}
+
+/* 2. Reduz o espaço acima do título principal "Minhas Notas Técnicas 🧠" */
+.main {
+    margin-top: -30px !important;  /* Aumentei para -30px para puxar o conteúdo bem para cima */
+}
+
+/* 3. Reduz o espaçamento dentro do menu de navegação superior */
+.nav {
+    line-height: 1.2 !important;
+    height: 45px !important;       /* Força a barra a ficar mais fina */
+    min-height: 45px !important;
+}
+
+/* 4. Ajustes específicos para o título e o ícone de tema */
+.nav h1 {
+    margin-top: -5px !important;   /* Alinha o texto "Antonio Barros" para cima */
+    font-size: 1.1rem !important;  /* Diminui um pouco o tamanho para caber na barra fina */
+    line-height: 1.2 !important;
+}
+
+.theme-toggle {
+    margin-top: -2px !important;   /* Alinha o ícone do sol/lua no centro da nova barra */
+}
+
+/* 5. Ajustes para telas maiores (Desktop) */
+@media (min-width: 768px) {
+    .header {
+        padding: 0 24px !important; /* Mantém o alinhamento lateral correto em telas grandes */
+        margin-top: 10px !important;
+    }
+    .main {
+        margin-top: -40px !important; /* Em telas grandes, puxa o conteúdo ainda mais para cima */
+    }
+}

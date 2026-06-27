@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title> Guia completo: instalando o driver NVIDIA no Debian 13 | Antonio Barros</title>
+<meta name="keywords" content="debian, debian 13, trixie, nvidia, dkms, driver, kernel">
+<meta name="description" content=" Guia de instalação correta dos drivers NVIDIA no Debian.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Antonio Barros (Alt + H)">
+                <img src="http://localhost:1313/logo_ab.png" alt="" aria-label="logo"
+                    height="35">Antonio Barros</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/categories/" title="🐧 Linux">
+                    <span>🐧 Linux</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/desenvolvimento/" title="💻 Desenvolvimento">
+                    <span>💻 Desenvolvimento</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/infraestrutura/" title="🛠 Infraestrutura">
+                    <span>🛠 Infraestrutura</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="📖 Sobre">
+                    <span>📖 Sobre</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+       Guia completo: instalando o driver NVIDIA no Debian 13
+    </h1>
+    <div class="post-description">
+       Guia de instalação correta dos drivers NVIDIA no Debian.
+    </div>
+    <div class="post-meta">
+
+<span title='2026-06-27 00:00:00 +0000 UTC'>June 27, 2026</span>&nbsp;·&nbsp;<span>3 min</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p><img alt="Instalação do driver NVIDIA no Debian 13" loading="lazy" src="/images/posts/captura-nvidia.png"></p>
+<p>O Debian é conhecido por sua estabilidade e por seguir uma filosofia de priorizar software livre, Por esse motivo os drivers proprietários da NVIDIA não são instalados automaticamente.</p>
+<p>Mas o próprio projeto Debian disponibiliza esses pacotes em seus repositórios oficiais, tornando a instalação simples e segura.</p>
+<p>Neste guia, mostrarei o procedimento que utilizei no Debian 13 (Trixie), incluindo algumas observações importantes sobre o funcionamento do DKMS.</p>
+<hr>
+<h2 id="1-instale-o-debian-normalmente">1. Instale o Debian normalmente<a hidden class="anchor" aria-hidden="true" href="#1-instale-o-debian-normalmente">#</a></h2>
+<p>Durante a instalação, habilite os seguintes repositórios:</p>
+<ul>
+<li>
+<p><code>main</code></p>
+</li>
+<li>
+<p><code>contrib</code></p>
+</li>
+<li>
+<p><code>non-free</code></p>
+</li>
+<li>
+<p><code>non-free-firmware</code></p>
+</li>
+</ul>
+<p>Caso essa opção não apareça durante a instalação, você poderá configurá-la posteriormente.</p>
+<hr>
+<h2 id="2-verifique-o-sourceslist">2. Verifique o <code>sources.list</code><a hidden class="anchor" aria-hidden="true" href="#2-verifique-o-sourceslist">#</a></h2>
+<p>No Debian 13 (Trixie), o arquivo deve conter algo semelhante a isto:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo nano /etc/apt/sources.list
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware
+</span></span><span style="display:flex;"><span>deb http://deb.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
+</span></span><span style="display:flex;"><span>deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware
+</span></span></code></pre></div><p>Atualize a lista de pacotes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span></code></pre></div><hr>
+<h2 id="3-atualize-completamente-o-sistema">3. Atualize completamente o sistema<a hidden class="anchor" aria-hidden="true" href="#3-atualize-completamente-o-sistema">#</a></h2>
+<p>Antes de instalar o driver da NVIDIA, atualize todos os pacotes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt full-upgrade
+</span></span><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div><p>Isso evita instalar o driver sobre um sistema parcialmente atualizado.</p>
+<hr>
+<h2 id="4-instale-os-pacotes-essenciais">4. Instale os pacotes essenciais<a hidden class="anchor" aria-hidden="true" href="#4-instale-os-pacotes-essenciais">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install build-essential dkms
+</span></span></code></pre></div><p>Esses pacotes serão utilizados para compilar automaticamente o módulo da NVIDIA sempre que um novo kernel for instalado.</p>
+<hr>
+<h2 id="5-instale-os-meta-pacotes-do-kernel">5. Instale os meta-pacotes do kernel<a hidden class="anchor" aria-hidden="true" href="#5-instale-os-meta-pacotes-do-kernel">#</a></h2>
+<p><strong>Este é um dos passos mais importantes.</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install linux-image-amd64 linux-headers-amd64
+</span></span></code></pre></div><p>Os meta-pacotes garantem que futuras atualizações instalem automaticamente o novo kernel e seus respectivos headers, permitindo que o DKMS recompile o driver da NVIDIA.</p>
+<hr>
+<h2 id="6-instale-o-driver-nvidia">6. Instale o driver NVIDIA<a hidden class="anchor" aria-hidden="true" href="#6-instale-o-driver-nvidia">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install nvidia-driver
+</span></span></code></pre></div><p>O Debian instalará automaticamente todas as dependências necessárias, incluindo o suporte ao DKMS.</p>
+<hr>
+<h2 id="7-reinicie-o-computador">7. Reinicie o computador<a hidden class="anchor" aria-hidden="true" href="#7-reinicie-o-computador">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo reboot
+</span></span></code></pre></div><hr>
+<h2 id="8-verifique-se-o-driver-foi-carregado">8. Verifique se o driver foi carregado<a hidden class="anchor" aria-hidden="true" href="#8-verifique-se-o-driver-foi-carregado">#</a></h2>
+<p>Confira se tudo está funcionando corretamente:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nvidia-smi
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>lsmod | grep nvidia
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>glxinfo | grep renderer
+</span></span></code></pre></div><p>Caso o comando <code>glxinfo</code> não exista:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install mesa-utils
+</span></span></code></pre></div><hr>
+<h1 id="-observação-importante-sobre-o-dkms">⚠️ Observação importante sobre o DKMS<a hidden class="anchor" aria-hidden="true" href="#-observação-importante-sobre-o-dkms">#</a></h1>
+<p>Após a instalação, é uma boa ideia verificar se o DKMS registrou corretamente o módulo da NVIDIA.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dkms status
+</span></span></code></pre></div><p>O resultado esperado é algo semelhante a:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>nvidia/xxx.xx, 6.x.x-amd64, x86_64: installed
+</span></span></code></pre></div><h3 id="se-aparecer-">Se aparecer <strong>&ldquo;dkms: comando não encontrado&rdquo;</strong><a hidden class="anchor" aria-hidden="true" href="#se-aparecer-">#</a></h3>
+<p>Foi exatamente o que aconteceu comigo.</p>
+<p>Apesar de o pacote <code>dkms</code> estar instalado o executável estava localizado em <code>/usr/sbin</code>, diretório que não fazia parte da variável <code>PATH</code> do meu usuário.</p>
+<p>Ao executar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/usr/sbin/dkms status
+</span></span></code></pre></div><p>o comando funcionou normalmente confirmando que o DKMS estava instalado e que o módulo da NVIDIA havia sido compilado corretamente para o kernel em uso.</p>
+<p>Para evitar digitar o caminho completo todas as vezes, adicionei <code>/usr/sbin</code> ao meu <code>PATH</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#39;export PATH=$PATH:/usr/sbin&#39;</span> &gt;&gt; ~/.bashrc
+</span></span><span style="display:flex;"><span>source ~/.bashrc
+</span></span></code></pre></div><p>Também conferi a configuração utilizada pelo <code>sudo</code>, <em>mas muito cuidado ao mexer aqui</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo visudo
+</span></span></code></pre></div><p>Na linha <code>Defaults secure_path</code>, verifique se <code>/usr/sbin</code> está presente.</p>
+<p>Abra o <code>visudo</code> apenas para verificar a configuração.</p>
+<p>Se <code>/usr/sbin</code> já estiver na linha <code>Defaults secure_path</code>, feche o editor sem alterar nada.</p>
+<blockquote>
+<p><strong>Por que isso é importante?</strong></p>
+<p>O DKMS é responsável por recompilar automaticamente o módulo proprietário da NVIDIA sempre que um novo kernel é instalado.</p>
+<p>Se ele não estiver funcionando corretamente o sistema pode inicializar sem o driver de vídeo após uma atualização, resultando em baixa resolução falha ao carregar o ambiente gráfico ou até mesmo uma tela preta.</p>
+<p>Por isso, vale a pena confirmar que o DKMS está funcionando antes da próxima atualização do kernel.</p>
+</blockquote>
+<hr>
+<h2 id="10-após-cada-atualização-de-kernel">10. Após cada atualização de kernel<a hidden class="anchor" aria-hidden="true" href="#10-após-cada-atualização-de-kernel">#</a></h2>
+<p>Antes de reiniciar o computador, execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dkms status
+</span></span></code></pre></div><p>Se o módulo da NVIDIA aparecer compilado para o novo kernel, está tudo certo.</p>
+<p>Também é possível conferir se os headers da nova versão foram instalados:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>dpkg -l | grep linux-headers
+</span></span></code></pre></div><p>Com essas duas verificações, você reduz bastante as chances de ter problemas após atualizar o kernel.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/debian/">Debian</a></li>
+      <li><a href="http://localhost:1313/tags/debian-13/">Debian 13</a></li>
+      <li><a href="http://localhost:1313/tags/trixie/">Trixie</a></li>
+      <li><a href="http://localhost:1313/tags/nvidia/">Nvidia</a></li>
+      <li><a href="http://localhost:1313/tags/dkms/">Dkms</a></li>
+      <li><a href="http://localhost:1313/tags/driver/">Driver</a></li>
+      <li><a href="http://localhost:1313/tags/kernel/">Kernel</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+    <span class="title">Next »</span>
+    <span>Guia completo do Distrobox no Debian</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Antonio Barros</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

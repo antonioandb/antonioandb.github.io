@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Guia completo do Distrobox no Debian | Antonio Barros</title>
+<meta name="keywords" content="debian, distrobox, podman, containers">
+<meta name="description" content="
+O Distrobox é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.
+Diferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.
+Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Antonio Barros (Alt + H)">
+                <img src="http://localhost:1313/logo_ab.png" alt="" aria-label="logo"
+                    height="35">Antonio Barros</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+            <li>
+                <a href="http://localhost:1313/categories/" title="🐧 Linux">
+                    <span>🐧 Linux</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/desenvolvimento/" title="💻 Desenvolvimento">
+                    <span>💻 Desenvolvimento</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/categories/infraestrutura/" title="🛠 Infraestrutura">
+                    <span>🛠 Infraestrutura</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about/" title="📖 Sobre">
+                    <span>📖 Sobre</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Guia completo do Distrobox no Debian
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-06-27 00:00:00 +0000 UTC'>June 27, 2026</span>&nbsp;·&nbsp;<span>3 min</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p><img alt="Instalação Distrobox" loading="lazy" src="/images/posts/captura-distrobox.png"></p>
+<p>O <strong>Distrobox</strong> é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.</p>
+<p>Diferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.</p>
+<p>Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.</p>
+<p>Neste guia será utilizado o <strong>Debian</strong> como sistema hospedeiro (host).</p>
+<hr>
+<h1 id="instalação">Instalação<a hidden class="anchor" aria-hidden="true" href="#instalação">#</a></h1>
+<h2 id="1-atualize-o-sistema">1. Atualize o sistema<a hidden class="anchor" aria-hidden="true" href="#1-atualize-o-sistema">#</a></h2>
+<p>Antes de instalar qualquer pacote, atualize a lista de repositórios e os pacotes instalados.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update <span style="color:#f92672">&amp;&amp;</span> sudo apt upgrade -y
+</span></span></code></pre></div><hr>
+<h2 id="2-instale-o-podman">2. Instale o Podman<a hidden class="anchor" aria-hidden="true" href="#2-instale-o-podman">#</a></h2>
+<p>O Distrobox utiliza um runtime de containers. Neste guia será utilizado o <strong>Podman</strong>, que já está disponível nos repositórios oficiais do Debian.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install -y podman
+</span></span></code></pre></div><hr>
+<h2 id="3-verifique-a-configuração-rootless">3. Verifique a configuração Rootless<a hidden class="anchor" aria-hidden="true" href="#3-verifique-a-configuração-rootless">#</a></h2>
+<p>Para executar containers sem utilizar <code>sudo</code>, o Podman utiliza o mecanismo de <strong>subUID</strong> e <strong>subGID</strong>.</p>
+<p>Na maioria das instalações do Debian essa configuração já existe, mas vale conferir:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cat /etc/subuid /etc/subgid
+</span></span></code></pre></div><p>A saída deverá conter uma entrada semelhante a:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>seu_usuario:100000:65536
+</span></span></code></pre></div><p>Caso os arquivos estejam vazios, será necessário configurá-los antes de utilizar o Distrobox.</p>
+<hr>
+<h2 id="4-instale-o-distrobox">4. Instale o Distrobox<a hidden class="anchor" aria-hidden="true" href="#4-instale-o-distrobox">#</a></h2>
+<p>O Distrobox também está disponível nos repositórios oficiais do Debian.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install -y distrobox
+</span></span></code></pre></div><p>Verifique se tudo foi instalado corretamente:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox --version
+</span></span></code></pre></div><hr>
+<h1 id="criando-um-container">Criando um container<a hidden class="anchor" aria-hidden="true" href="#criando-um-container">#</a></h1>
+<p>A sintaxe geral é:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name &lt;nome&gt; --image &lt;imagem:tag&gt;
+</span></span></code></pre></div><h2 id="ubuntu">Ubuntu<a hidden class="anchor" aria-hidden="true" href="#ubuntu">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name ubuntu --image ubuntu:latest
+</span></span></code></pre></div><p>ou uma versão específica:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name ubuntu --image ubuntu:26.04
+</span></span></code></pre></div><hr>
+<h2 id="debian">Debian<a hidden class="anchor" aria-hidden="true" href="#debian">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name debian --image debian:stable
+</span></span></code></pre></div><hr>
+<h2 id="fedora">Fedora<a hidden class="anchor" aria-hidden="true" href="#fedora">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name fedora --image fedora:latest
+</span></span></code></pre></div><hr>
+<h2 id="arch-linux">Arch Linux<a hidden class="anchor" aria-hidden="true" href="#arch-linux">#</a></h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox create --name arch --image archlinux:latest
+</span></span></code></pre></div><hr>
+<p>Na primeira execução o Distrobox perguntará se deseja baixar a imagem.</p>
+<p>Responda:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>y
+</span></span></code></pre></div><p>Depois aguarde o download e a configuração inicial do ambiente.</p>
+<hr>
+<h1 id="entrando-no-container">Entrando no container<a hidden class="anchor" aria-hidden="true" href="#entrando-no-container">#</a></h1>
+<p>Para acessar um container:</p>
+<p>Ubuntu</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox enter ubuntu
+</span></span></code></pre></div><p>Fedora</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox enter fedora
+</span></span></code></pre></div><p>Arch</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox enter arch
+</span></span></code></pre></div><p>Na primeira inicialização o Distrobox fará algumas configurações automaticamente, como compartilhamento da pasta pessoal, integração com o tema do sistema e variáveis de ambiente.</p>
+<p>Esse processo acontece apenas uma vez.</p>
+<hr>
+<h1 id="instalando-programas">Instalando programas<a hidden class="anchor" aria-hidden="true" href="#instalando-programas">#</a></h1>
+<p>Depois de entrar no container, utilize o gerenciador de pacotes da distribuição normalmente.</p>
+<p>Ubuntu / Debian</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install python3 python3-pip
+</span></span></code></pre></div><p>Fedora</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo dnf install python3 python3-pip
+</span></span></code></pre></div><p>Arch Linux</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo pacman -Syu python python-pip
+</span></span></code></pre></div><hr>
+<h1 id="saindo-do-container">Saindo do container<a hidden class="anchor" aria-hidden="true" href="#saindo-do-container">#</a></h1>
+<p>Para sair basta executar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>exit
+</span></span></code></pre></div><hr>
+<h1 id="comandos-úteis">Comandos úteis<a hidden class="anchor" aria-hidden="true" href="#comandos-úteis">#</a></h1>
+<p>Entrar em um container</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox enter ubuntu
+</span></span></code></pre></div><p>Listar containers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox list
+</span></span></code></pre></div><p>Parar um container</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox stop ubuntu
+</span></span></code></pre></div><p>Remover um container</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox rm ubuntu
+</span></span></code></pre></div><p>Atualizar os containers</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>distrobox upgrade
+</span></span></code></pre></div><hr>
+<h1 id="observações">Observações<a hidden class="anchor" aria-hidden="true" href="#observações">#</a></h1>
+<ul>
+<li>
+<p>Os containers compartilham sua pasta <strong>HOME</strong> com o sistema hospedeiro.</p>
+</li>
+<li>
+<p>Cada container possui seu próprio gerenciador de pacotes.</p>
+</li>
+<li>
+<p>Você pode criar quantos containers desejar.</p>
+</li>
+<li>
+<p>O nome do container não precisa ser igual ao nome da distribuição.</p>
+</li>
+<li>
+<p>A opção <code>latest</code> sempre baixa a versão mais recente disponível da imagem.</p>
+</li>
+</ul>
+<p>Como o Distrobox utiliza imagens OCI é possível usar praticamente qualquer distribuição Linux que possua uma imagem oficial disponível.</p>
+<p>Alguns exemplos:</p>
+<ul>
+<li>
+<p>Ubuntu</p>
+</li>
+<li>
+<p>Debian</p>
+</li>
+<li>
+<p>Fedora</p>
+</li>
+<li>
+<p>Arch Linux</p>
+</li>
+<li>
+<p>openSUSE</p>
+</li>
+<li>
+<p>AlmaLinux</p>
+</li>
+<li>
+<p>Rocky Linux</p>
+</li>
+<li>
+<p>Kali Linux</p>
+</li>
+<li>
+<p>Alpine Linux</p>
+</li>
+<li>
+<p>Gentoo</p>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/debian/">Debian</a></li>
+      <li><a href="http://localhost:1313/tags/distrobox/">Distrobox</a></li>
+      <li><a href="http://localhost:1313/tags/podman/">Podman</a></li>
+      <li><a href="http://localhost:1313/tags/containers/">Containers</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+    <span class="title">« Prev</span>
+    <span> Guia completo: instalando o driver NVIDIA no Debian 13</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/">
+    <span class="title">Next »</span>
+    <span>Guia de instalação do Pyenv em distros base Debian/Ubuntu</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/">Antonio Barros</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

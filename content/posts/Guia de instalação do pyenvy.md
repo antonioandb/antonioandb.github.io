@@ -1,6 +1,6 @@
 ---
 title: "Guia de instalação do Pyenv em distros base Debian/Ubuntu"
-description: "Pare de brigar com versões do Python — aprenda a usar Pyenv no Debian/Ubuntu de forma simples"
+description: "Pare de brigar com versões do Python aprenda a usar Pyenv no Debian/Ubuntu de forma simples"
 date: 2026-06-27
 draft: false
 

@@ -6,8 +6,19 @@
     <description>Recent content on Antonio Barros</description>
     <generator>Hugo</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 28 Jun 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sobre</title>
+      <link>http://localhost:1313/sobre/</link>
+      <pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/sobre/</guid>
+      <description>&lt;h1 id=&#34;olá-&#34;&gt;Olá! 👋&lt;/h1&gt;
+&lt;p&gt;Meu nome é &lt;strong&gt;Antonio Barros&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Gosto de aprender como as coisas funcionam e utilizo este espaço para documentar tudo o que aprendo durante minha jornada no mundo do &lt;strong&gt;Linux&lt;/strong&gt;, &lt;strong&gt;desenvolvimento de software&lt;/strong&gt;, &lt;strong&gt;infraestrutura&lt;/strong&gt; e &lt;strong&gt;software livre&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Em vez de deixar minhas anotações espalhadas em arquivos pessoais, decidi transformá-las em artigos públicos para que outras pessoas também possam aprender com elas.&lt;/p&gt;
+&lt;p&gt;Meu objetivo é construir uma base de conhecimento organizada, prática e útil, tanto para mim quanto para quem estiver estudando os mesmos assuntos.&lt;/p&gt;</description>
+    </item>
     <item>
       <title> Guia completo: instalando o driver NVIDIA no Debian 13</title>
       <link>http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/</link>
@@ -30,7 +41,7 @@
       <link>http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</link>
       <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</guid>
-      <description>Pare de brigar com versões do Python — aprenda a usar Pyenv no Debian/Ubuntu de forma simples</description>
+      <description>Pare de brigar com versões do Python aprenda a usar Pyenv no Debian/Ubuntu de forma simples</description>
     </item>
   </channel>
 </rss>

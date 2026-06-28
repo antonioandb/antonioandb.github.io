@@ -25,47 +25,43 @@ icon = "/logo_ab.png"       # O caminho começa com / porque aponta para a pasta
 iconHeight = 35          # Ajuste a altura em pixels para alinhar com o texto
 
 [params.homeInfoParams]
-Title = "Minhas Notas Técnicas 🧠"
+Title = "Notas Técnicas"
 Content = """
-Um repositório público do meu aprendizado sobre Linux, desenvolvimento, infraestrutura e arquitetura.
-
-Aqui documento minhas descobertas, tutoriais e experiências para ajudar outras pessoas que estão no mesmo caminho.
+Compartilho tutoriais, estudos e experiências sobre Linux, desenvolvimento, infraestrutura e software livre.
 """
 
 [[params.socialIcons]]
 name = "github"
 url = "https://github.com/antonioandb"
 
-[[params.socialIcons]]
-name = "discord"
-url = "https://discord.gg/seuservidor"
+
 
 [[params.socialIcons]]
 name = "x"
-url = "https://x.com/seuusuario"
+url = "https://x.com/antoniobarrosan"
 
 [menu]
 
 [[menu.main]]
 identifier = "linux"
-name = "🐧 Linux"
+name = "* Linux"
 url = "/categories/"
 weight = 10
 
 [[menu.main]]
 identifier = "dev"
-name = "💻 Desenvolvimento"
+name = "* Desenvolvimento"
 url = "/categories/desenvolvimento/"
 weight = 20
 
 [[menu.main]]
 identifier = "infra"
-name = "🛠 Infraestrutura"
+name = "* Infraestrutura"
 url = "/categories/infraestrutura/"
 weight = 30
 
 [[menu.main]]
-identifier = "about"
-name = "📖 Sobre"
-url = "/about/"
+identifier = "sobre"
+name = "* Sobre"
+url = "/sobre/"
 weight = 40

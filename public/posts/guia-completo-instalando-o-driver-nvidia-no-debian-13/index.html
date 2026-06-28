@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title> Guia completo: instalando o driver NVIDIA no Debian 13 | Antonio Barros</title>
 <meta name="keywords" content="debian, debian 13, trixie, nvidia, dkms, driver, kernel">
 <meta name="description" content=" Guia de instalação correta dos drivers NVIDIA no Debian.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+<link rel="canonical" href="https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://antonioandb.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://antonioandb.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://antonioandb.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://antonioandb.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://antonioandb.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+<link rel="alternate" hreflang="en" href="https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
 <noscript>
     <style>
         #theme-toggle,
@@ -64,14 +64,83 @@
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+  <meta property="og:site_name" content="Antonio Barros">
+  <meta property="og:title" content=" Guia completo: instalando o driver NVIDIA no Debian 13">
+  <meta property="og:description" content="Guia de instalação correta dos drivers NVIDIA no Debian.">
+  <meta property="og:locale" content="pt_br">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+    <meta property="article:tag" content="Debian">
+    <meta property="article:tag" content="Debian 13">
+    <meta property="article:tag" content="Trixie">
+    <meta property="article:tag" content="Nvidia">
+    <meta property="article:tag" content="Dkms">
+    <meta property="article:tag" content="Driver">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content=" Guia completo: instalando o driver NVIDIA no Debian 13">
+  <meta name="twitter:description" content="Guia de instalação correta dos drivers NVIDIA no Debian.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://antonioandb.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": " Guia completo: instalando o driver NVIDIA no Debian 13",
+      "item": "https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": " Guia completo: instalando o driver NVIDIA no Debian 13",
+  "name": " Guia completo: instalando o driver NVIDIA no Debian 13",
+  "description": " Guia de instalação correta dos drivers NVIDIA no Debian.",
+  "keywords": [
+    "debian", "debian 13", "trixie", "nvidia", "dkms", "driver", "kernel"
+  ],
+  "articleBody": "\nO Debian é conhecido por sua estabilidade e por seguir uma filosofia de priorizar software livre, Por esse motivo os drivers proprietários da NVIDIA não são instalados automaticamente.\nMas o próprio projeto Debian disponibiliza esses pacotes em seus repositórios oficiais, tornando a instalação simples e segura.\nNeste guia, mostrarei o procedimento que utilizei no Debian 13 (Trixie), incluindo algumas observações importantes sobre o funcionamento do DKMS.\n1. Instale o Debian normalmente Durante a instalação, habilite os seguintes repositórios:\nmain\ncontrib\nnon-free\nnon-free-firmware\nCaso essa opção não apareça durante a instalação, você poderá configurá-la posteriormente.\n2. Verifique o sources.list No Debian 13 (Trixie), o arquivo deve conter algo semelhante a isto:\nsudo nano /etc/apt/sources.list deb http://deb.debian.org/debian trixie main contrib non-free non-free-firmware deb http://deb.debian.org/debian-security trixie-security main contrib non-free non-free-firmware deb http://deb.debian.org/debian trixie-updates main contrib non-free non-free-firmware Atualize a lista de pacotes:\nsudo apt update 3. Atualize completamente o sistema Antes de instalar o driver da NVIDIA, atualize todos os pacotes:\nsudo apt full-upgrade sudo reboot Isso evita instalar o driver sobre um sistema parcialmente atualizado.\n4. Instale os pacotes essenciais sudo apt install build-essential dkms Esses pacotes serão utilizados para compilar automaticamente o módulo da NVIDIA sempre que um novo kernel for instalado.\n5. Instale os meta-pacotes do kernel Este é um dos passos mais importantes.\nsudo apt install linux-image-amd64 linux-headers-amd64 Os meta-pacotes garantem que futuras atualizações instalem automaticamente o novo kernel e seus respectivos headers, permitindo que o DKMS recompile o driver da NVIDIA.\n6. Instale o driver NVIDIA sudo apt install nvidia-driver O Debian instalará automaticamente todas as dependências necessárias, incluindo o suporte ao DKMS.\n7. Reinicie o computador sudo reboot 8. Verifique se o driver foi carregado Confira se tudo está funcionando corretamente:\nnvidia-smi lsmod | grep nvidia glxinfo | grep renderer Caso o comando glxinfo não exista:\nsudo apt install mesa-utils ⚠️ Observação importante sobre o DKMS Após a instalação, é uma boa ideia verificar se o DKMS registrou corretamente o módulo da NVIDIA.\ndkms status O resultado esperado é algo semelhante a:\nnvidia/xxx.xx, 6.x.x-amd64, x86_64: installed Se aparecer “dkms: comando não encontrado” Foi exatamente o que aconteceu comigo.\nApesar de o pacote dkms estar instalado o executável estava localizado em /usr/sbin, diretório que não fazia parte da variável PATH do meu usuário.\nAo executar:\n/usr/sbin/dkms status o comando funcionou normalmente confirmando que o DKMS estava instalado e que o módulo da NVIDIA havia sido compilado corretamente para o kernel em uso.\nPara evitar digitar o caminho completo todas as vezes, adicionei /usr/sbin ao meu PATH:\necho 'export PATH=$PATH:/usr/sbin' \u003e\u003e ~/.bashrc source ~/.bashrc Também conferi a configuração utilizada pelo sudo, mas muito cuidado ao mexer aqui:\nsudo visudo Na linha Defaults secure_path, verifique se /usr/sbin está presente.\nAbra o visudo apenas para verificar a configuração.\nSe /usr/sbin já estiver na linha Defaults secure_path, feche o editor sem alterar nada.\nPor que isso é importante?\nO DKMS é responsável por recompilar automaticamente o módulo proprietário da NVIDIA sempre que um novo kernel é instalado.\nSe ele não estiver funcionando corretamente o sistema pode inicializar sem o driver de vídeo após uma atualização, resultando em baixa resolução falha ao carregar o ambiente gráfico ou até mesmo uma tela preta.\nPor isso, vale a pena confirmar que o DKMS está funcionando antes da próxima atualização do kernel.\n10. Após cada atualização de kernel Antes de reiniciar o computador, execute:\ndkms status Se o módulo da NVIDIA aparecer compilado para o novo kernel, está tudo certo.\nTambém é possível conferir se os headers da nova versão foram instalados:\ndpkg -l | grep linux-headers Com essas duas verificações, você reduz bastante as chances de ter problemas após atualizar o kernel.\n",
+  "wordCount" : "607",
+  "inLanguage": "en",
+  "datePublished": "2026-06-27T00:00:00Z",
+  "dateModified": "2026-06-27T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Antonio Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://antonioandb.github.io/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Antonio Barros (Alt + H)">
-                <img src="http://localhost:1313/logo_ab.png" alt="" aria-label="logo"
+            <a href="https://antonioandb.github.io/" accesskey="h" title="Antonio Barros (Alt + H)">
+                <img src="https://antonioandb.github.io/logo_ab.png" alt="" aria-label="logo"
                     height="35">Antonio Barros</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -98,22 +167,22 @@
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="http://localhost:1313/categories/" title="* Linux">
+                <a href="https://antonioandb.github.io/categories/" title="* Linux">
                     <span>* Linux</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/desenvolvimento/" title="* Desenvolvimento">
+                <a href="https://antonioandb.github.io/categories/desenvolvimento/" title="* Desenvolvimento">
                     <span>* Desenvolvimento</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/infraestrutura/" title="* Infraestrutura">
+                <a href="https://antonioandb.github.io/categories/infraestrutura/" title="* Infraestrutura">
                     <span>* Infraestrutura</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/sobre/" title="* Sobre">
+                <a href="https://antonioandb.github.io/sobre/" title="* Sobre">
                     <span>* Sobre</span>
                 </a>
             </li>
@@ -238,16 +307,16 @@
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/debian/">Debian</a></li>
-      <li><a href="http://localhost:1313/tags/debian-13/">Debian 13</a></li>
-      <li><a href="http://localhost:1313/tags/trixie/">Trixie</a></li>
-      <li><a href="http://localhost:1313/tags/nvidia/">Nvidia</a></li>
-      <li><a href="http://localhost:1313/tags/dkms/">Dkms</a></li>
-      <li><a href="http://localhost:1313/tags/driver/">Driver</a></li>
-      <li><a href="http://localhost:1313/tags/kernel/">Kernel</a></li>
+      <li><a href="https://antonioandb.github.io/tags/debian/">Debian</a></li>
+      <li><a href="https://antonioandb.github.io/tags/debian-13/">Debian 13</a></li>
+      <li><a href="https://antonioandb.github.io/tags/trixie/">Trixie</a></li>
+      <li><a href="https://antonioandb.github.io/tags/nvidia/">Nvidia</a></li>
+      <li><a href="https://antonioandb.github.io/tags/dkms/">Dkms</a></li>
+      <li><a href="https://antonioandb.github.io/tags/driver/">Driver</a></li>
+      <li><a href="https://antonioandb.github.io/tags/kernel/">Kernel</a></li>
     </ul>
 <nav class="paginav">
-  <a class="next" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+  <a class="next" href="https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/">
     <span class="title">Next »</span>
     <span>Guia completo do Distrobox no Debian</span>
   </a>
@@ -258,7 +327,7 @@
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Antonio Barros</a></span> · 
+        <span>&copy; 2026 <a href="https://antonioandb.github.io/">Antonio Barros</a></span> · 
 
     
     

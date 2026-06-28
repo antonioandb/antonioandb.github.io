@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Desenvolvimento on Antonio Barros</title>
-    <link>http://localhost:1313/categories/desenvolvimento/</link>
+    <link>https://antonioandb.github.io/categories/desenvolvimento/</link>
     <description>Recent content in Desenvolvimento on Antonio Barros</description>
     <generator>Hugo</generator>
     <language>pt-br</language>
     <lastBuildDate>Sat, 27 Jun 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/desenvolvimento/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://antonioandb.github.io/categories/desenvolvimento/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Guia de instalação do Pyenv em distros base Debian/Ubuntu</title>
-      <link>http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</link>
+      <link>https://antonioandb.github.io/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</link>
       <pubDate>Sat, 27 Jun 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</guid>
-      <description>Pare de brigar com versões do Python — aprenda a usar Pyenv no Debian/Ubuntu de forma simples</description>
+      <guid>https://antonioandb.github.io/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</guid>
+      <description>Pare de brigar com versões do Python aprenda a usar Pyenv no Debian/Ubuntu de forma simples</description>
     </item>
   </channel>
 </rss>

@@ -2,82 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://antonioandb.github.io/</loc>
     <lastmod>2026-06-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/sobre/</loc>
+    <loc>https://antonioandb.github.io/sobre/</loc>
     <lastmod>2026-06-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/</loc>
+    <loc>https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://antonioandb.github.io/categories/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/containers/</loc>
+    <loc>https://antonioandb.github.io/tags/containers/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/debian/</loc>
+    <loc>https://antonioandb.github.io/tags/debian/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/debian-13/</loc>
+    <loc>https://antonioandb.github.io/tags/debian-13/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/desenvolvimento/</loc>
+    <loc>https://antonioandb.github.io/categories/desenvolvimento/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/desenvolvimento/</loc>
+    <loc>https://antonioandb.github.io/tags/desenvolvimento/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/distrobox/</loc>
+    <loc>https://antonioandb.github.io/tags/distrobox/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/dkms/</loc>
+    <loc>https://antonioandb.github.io/tags/dkms/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/driver/</loc>
+    <loc>https://antonioandb.github.io/tags/driver/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/</loc>
+    <loc>https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</loc>
+    <loc>https://antonioandb.github.io/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/kernel/</loc>
+    <loc>https://antonioandb.github.io/tags/kernel/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/linux/</loc>
+    <loc>https://antonioandb.github.io/categories/linux/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/nvidia/</loc>
+    <loc>https://antonioandb.github.io/tags/nvidia/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/podman/</loc>
+    <loc>https://antonioandb.github.io/tags/podman/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://antonioandb.github.io/posts/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/pyenv/</loc>
+    <loc>https://antonioandb.github.io/categories/pyenv/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/pyenv/</loc>
+    <loc>https://antonioandb.github.io/tags/pyenv/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/python/</loc>
+    <loc>https://antonioandb.github.io/categories/python/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/python/</loc>
+    <loc>https://antonioandb.github.io/tags/python/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://antonioandb.github.io/tags/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/trixie/</loc>
+    <loc>https://antonioandb.github.io/tags/trixie/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/ubuntu/</loc>
+    <loc>https://antonioandb.github.io/tags/ubuntu/</loc>
     <lastmod>2026-06-27T00:00:00+00:00</lastmod>
   </url>
 </urlset>

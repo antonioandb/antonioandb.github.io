@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto" data-theme="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Guia completo do Distrobox no Debian | Antonio Barros</title>
 <meta name="keywords" content="debian, distrobox, podman, containers">
 <meta name="description" content="
@@ -12,16 +12,16 @@ O Distrobox é uma ferramenta que permite criar ambientes isolados (containers) 
 Diferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.
 Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+<link rel="canonical" href="https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://antonioandb.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://antonioandb.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://antonioandb.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://antonioandb.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://antonioandb.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/guia-completo-do-distrobox-no-debian/">
+<link rel="alternate" hreflang="en" href="https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/">
 <noscript>
     <style>
         #theme-toggle,
@@ -67,14 +67,85 @@ Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado
         document.querySelector("html").dataset.theme = 'light';
     }
 
+</script><meta property="og:url" content="https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/">
+  <meta property="og:site_name" content="Antonio Barros">
+  <meta property="og:title" content="Guia completo do Distrobox no Debian">
+  <meta property="og:description" content="O Distrobox é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.
+Diferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.
+Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.">
+  <meta property="og:locale" content="pt_br">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-06-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2026-06-27T00:00:00+00:00">
+    <meta property="article:tag" content="Debian">
+    <meta property="article:tag" content="Distrobox">
+    <meta property="article:tag" content="Podman">
+    <meta property="article:tag" content="Containers">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Guia completo do Distrobox no Debian">
+  <meta name="twitter:description" content="O Distrobox é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.
+Diferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.
+Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://antonioandb.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Guia completo do Distrobox no Debian",
+      "item": "https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Guia completo do Distrobox no Debian",
+  "name": "Guia completo do Distrobox no Debian",
+  "description": "\nO Distrobox é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.\nDiferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.\nIsso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.\n",
+  "keywords": [
+    "debian", "distrobox", "podman", "containers"
+  ],
+  "articleBody": "\nO Distrobox é uma ferramenta que permite criar ambientes isolados (containers) utilizando diferentes distribuições Linux, como Ubuntu, Fedora, Arch Linux, Debian, openSUSE e muitas outras, sem precisar instalar máquinas virtuais.\nDiferente de um container tradicional, o Distrobox integra o ambiente com o sistema hospedeiro, compartilhando sua pasta pessoal, dispositivos, tema, variáveis de ambiente e até permitindo exportar aplicações gráficas para o menu do sistema.\nIsso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado.\nNeste guia será utilizado o Debian como sistema hospedeiro (host).\nInstalação 1. Atualize o sistema Antes de instalar qualquer pacote, atualize a lista de repositórios e os pacotes instalados.\nsudo apt update \u0026\u0026 sudo apt upgrade -y 2. Instale o Podman O Distrobox utiliza um runtime de containers. Neste guia será utilizado o Podman, que já está disponível nos repositórios oficiais do Debian.\nsudo apt install -y podman 3. Verifique a configuração Rootless Para executar containers sem utilizar sudo, o Podman utiliza o mecanismo de subUID e subGID.\nNa maioria das instalações do Debian essa configuração já existe, mas vale conferir:\ncat /etc/subuid /etc/subgid A saída deverá conter uma entrada semelhante a:\nseu_usuario:100000:65536 Caso os arquivos estejam vazios, será necessário configurá-los antes de utilizar o Distrobox.\n4. Instale o Distrobox O Distrobox também está disponível nos repositórios oficiais do Debian.\nsudo apt install -y distrobox Verifique se tudo foi instalado corretamente:\ndistrobox --version Criando um container A sintaxe geral é:\ndistrobox create --name --image Ubuntu distrobox create --name ubuntu --image ubuntu:latest ou uma versão específica:\ndistrobox create --name ubuntu --image ubuntu:26.04 Debian distrobox create --name debian --image debian:stable Fedora distrobox create --name fedora --image fedora:latest Arch Linux distrobox create --name arch --image archlinux:latest Na primeira execução o Distrobox perguntará se deseja baixar a imagem.\nResponda:\ny Depois aguarde o download e a configuração inicial do ambiente.\nEntrando no container Para acessar um container:\nUbuntu\ndistrobox enter ubuntu Fedora\ndistrobox enter fedora Arch\ndistrobox enter arch Na primeira inicialização o Distrobox fará algumas configurações automaticamente, como compartilhamento da pasta pessoal, integração com o tema do sistema e variáveis de ambiente.\nEsse processo acontece apenas uma vez.\nInstalando programas Depois de entrar no container, utilize o gerenciador de pacotes da distribuição normalmente.\nUbuntu / Debian\nsudo apt update sudo apt install python3 python3-pip Fedora\nsudo dnf install python3 python3-pip Arch Linux\nsudo pacman -Syu python python-pip Saindo do container Para sair basta executar:\nexit Comandos úteis Entrar em um container\ndistrobox enter ubuntu Listar containers\ndistrobox list Parar um container\ndistrobox stop ubuntu Remover um container\ndistrobox rm ubuntu Atualizar os containers\ndistrobox upgrade Observações Os containers compartilham sua pasta HOME com o sistema hospedeiro.\nCada container possui seu próprio gerenciador de pacotes.\nVocê pode criar quantos containers desejar.\nO nome do container não precisa ser igual ao nome da distribuição.\nA opção latest sempre baixa a versão mais recente disponível da imagem.\nComo o Distrobox utiliza imagens OCI é possível usar praticamente qualquer distribuição Linux que possua uma imagem oficial disponível.\nAlguns exemplos:\nUbuntu\nDebian\nFedora\nArch Linux\nopenSUSE\nAlmaLinux\nRocky Linux\nKali Linux\nAlpine Linux\nGentoo\n",
+  "wordCount" : "513",
+  "inLanguage": "en",
+  "datePublished": "2026-06-27T00:00:00Z",
+  "dateModified": "2026-06-27T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://antonioandb.github.io/posts/guia-completo-do-distrobox-no-debian/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Antonio Barros",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://antonioandb.github.io/favicon.ico"
+    }
+  }
+}
 </script>
 </head>
 <body id="top">
     <header class="header">
     <nav class="header-nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Antonio Barros (Alt + H)">
-                <img src="http://localhost:1313/logo_ab.png" alt="" aria-label="logo"
+            <a href="https://antonioandb.github.io/" accesskey="h" title="Antonio Barros (Alt + H)">
+                <img src="https://antonioandb.github.io/logo_ab.png" alt="" aria-label="logo"
                     height="35">Antonio Barros</a>
             <div class="logo-switches">
                 <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
@@ -101,22 +172,22 @@ Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado
         </div>
         <ul id="menu" class="menu">
             <li>
-                <a href="http://localhost:1313/categories/" title="* Linux">
+                <a href="https://antonioandb.github.io/categories/" title="* Linux">
                     <span>* Linux</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/desenvolvimento/" title="* Desenvolvimento">
+                <a href="https://antonioandb.github.io/categories/desenvolvimento/" title="* Desenvolvimento">
                     <span>* Desenvolvimento</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/categories/infraestrutura/" title="* Infraestrutura">
+                <a href="https://antonioandb.github.io/categories/infraestrutura/" title="* Infraestrutura">
                     <span>* Infraestrutura</span>
                 </a>
             </li>
             <li>
-                <a href="http://localhost:1313/sobre/" title="* Sobre">
+                <a href="https://antonioandb.github.io/sobre/" title="* Sobre">
                     <span>* Sobre</span>
                 </a>
             </li>
@@ -283,17 +354,17 @@ Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/debian/">Debian</a></li>
-      <li><a href="http://localhost:1313/tags/distrobox/">Distrobox</a></li>
-      <li><a href="http://localhost:1313/tags/podman/">Podman</a></li>
-      <li><a href="http://localhost:1313/tags/containers/">Containers</a></li>
+      <li><a href="https://antonioandb.github.io/tags/debian/">Debian</a></li>
+      <li><a href="https://antonioandb.github.io/tags/distrobox/">Distrobox</a></li>
+      <li><a href="https://antonioandb.github.io/tags/podman/">Podman</a></li>
+      <li><a href="https://antonioandb.github.io/tags/containers/">Containers</a></li>
     </ul>
 <nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
+  <a class="prev" href="https://antonioandb.github.io/posts/guia-completo-instalando-o-driver-nvidia-no-debian-13/">
     <span class="title">« Prev</span>
     <span> Guia completo: instalando o driver NVIDIA no Debian 13</span>
   </a>
-  <a class="next" href="http://localhost:1313/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/">
+  <a class="next" href="https://antonioandb.github.io/posts/guia-de-instala%C3%A7%C3%A3o-do-pyenvy/">
     <span class="title">Next »</span>
     <span>Guia de instalação do Pyenv em distros base Debian/Ubuntu</span>
   </a>
@@ -304,7 +375,7 @@ Isso o torna uma excelente ferramenta para desenvolvimento, testes e aprendizado
     </main>
     
 <footer class="footer">
-        <span>&copy; 2026 <a href="http://localhost:1313/">Antonio Barros</a></span> · 
+        <span>&copy; 2026 <a href="https://antonioandb.github.io/">Antonio Barros</a></span> · 
 
     
     

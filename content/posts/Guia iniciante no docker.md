@@ -1,4 +1,20 @@
-# Guia iniciante no docker
+---
+title: "Guia iniciante no docker"
+description: "Inicie o aprendizado de docker: nesse artigo eu passo pelos conceitos fundamentais do docker como imagem e container"
+date: 2026-07-01
+draft: false
+
+categories:
+ - docker
+ - linux
+ - containers
+
+tags:
+  - docker
+  - containers
+  
+---
+
 
 O **Docker** é uma plataforma de código aberto que permite empacotar e executar aplicativos em ambientes isolados chamados **contêineres**.
 

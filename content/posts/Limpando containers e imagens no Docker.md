@@ -1,7 +1,4 @@
-# 
-
 ---
-
 title: "Limpando containers e imagens no Docker"
 description: "Aprenda a remover containers, imagens e liberar espaço em disco usando os principais comandos do Docker."
 date: 2026-07-01
@@ -23,10 +20,6 @@ tags:
 - docker system prune
 
 ---
-
-
-
-# 
 
 esse artigo é uma continuação de "Primeiros comandos no docker".
 

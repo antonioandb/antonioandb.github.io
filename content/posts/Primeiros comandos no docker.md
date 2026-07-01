@@ -75,7 +75,7 @@ docker ps -a
 
  com isso veremos uma lista com informações sobre os contêineres, como CONTAINER ID, IMAGE, COMMAND, STATUS e NAMES.
 
- ![Alt text](images/posts/artigo_docker01.png)
+ ![Alt text](/images/posts/artigo_docker01.png)
 
 Também podemos dar um nome ao container no momento da criação:
 
